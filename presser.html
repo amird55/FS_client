@@ -18,6 +18,9 @@
             border-radius: 50%;
             display: inline-block;
             margin: 10px;
+            font-size: 30px;
+            text-align: center;
+            line-height: 60px;
         }
         .container{
             width: 100%;
@@ -26,37 +29,54 @@
     </style>
 </head>
 <body>
+<div>  </div>
 <script>
-    function setBig(color) {
-        let screen = document.getElementById("bigScreen");
-        screen.style.backgroundColor = color;
-    }
     let el = document.createElement("div");
     el.classList.add("main_color");
     el.id = "bigScreen";
     document.body.appendChild(el);
 
-    el = document.createElement("div");
-    el.classList.add("container");
-    el.id = "container";
-    document.body.appendChild(el);
+    let colors = ["#f85656", "#8cf48c", "#a0e5f4", "yellow"];
+    let cnt={};
+    createBtnsPanel();
+    showCounters();
+    
+    function createBtnsPanel() {
+        el = document.createElement("div");
+        el.classList.add("container");
+        el.id = "container";
+        document.body.appendChild(el);
 
-    let colors = ["red", "green", "blue", "yellow"];
-    for (let clr of colors) {
-        // create div
-        let btn = document.createElement("div");
-        // add class (btn) to div
-        btn.classList.add("btn");
-        // add style (background-color) to div
-        btn.style.backgroundColor = clr;
-        // add onclick event listener to div
-        btn.addEventListener("click", function () {
-            setBig(clr);
-        });
-        // append div to container
-        document.getElementById("container").appendChild(btn);
-        
+        for (let clr of colors) {
+            cnt[clr] = 0;
+            // create div
+            let btn = document.createElement("div");
+            // add class (btn) to div
+            btn.classList.add("btn");
+            // add id  to div
+            // btn.id = "btn_"+clr;
+            btn.id = `btn_${clr}`;
+            // add style (background-color) to div
+            btn.style.backgroundColor = clr;
+            // add onclick event listener to div
+            btn.addEventListener("click", function () {
+                setBig(clr);
+            });
+            // append div to container
+            document.getElementById("container").appendChild(btn);
+        }
     }
+    function setBig(color) {
+        let screen = document.getElementById("bigScreen");
+        screen.style.backgroundColor = color;
+        cnt[color]++;
+    }
+    function showCounters(){
+        for (let clr of colors) {
+           document.getElementById(`btn_${clr}`).innerHTML =  cnt[clr];
+        }
+    }
+
 </script>
 </body>
 </html>
