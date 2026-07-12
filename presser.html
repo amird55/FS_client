@@ -27,16 +27,28 @@
 </head>
 <body>
 <div class="main_color" id="bigScreen"></div>
-<div class="container">
-    <div onclick="setBig('red')" class="btn" style="background-color: red;"></div>
-    <div onclick="setBig('green')" class="btn" style="background-color: green;"></div>
-    <div class="btn"></div>
-    <div class="btn"></div>
+<div class="container" id="container">
 </div>
 <script>
     function setBig(color) {
         let screen = document.getElementById("bigScreen");
         screen.style.backgroundColor = color;
+    }
+    let colors = ["red", "green", "blue", "yellow"];
+    for (let clr of colors) {
+        // create div
+        let btn = document.createElement("div");
+        // add class (btn) to div
+        btn.classList.add("btn");
+        // add style (background-color) to div
+        btn.style.backgroundColor = clr;
+        // add onclick event listener to div
+        btn.addEventListener("click", function () {
+            setBig(clr);
+        });
+        // append div to container
+        document.getElementById("container").appendChild(btn);
+        
     }
 </script>
 </body>
