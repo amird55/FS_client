@@ -26,14 +26,21 @@
     </style>
 </head>
 <body>
-<div class="main_color" id="bigScreen"></div>
-<div class="container" id="container">
-</div>
 <script>
     function setBig(color) {
         let screen = document.getElementById("bigScreen");
         screen.style.backgroundColor = color;
     }
+    let el = document.createElement("div");
+    el.classList.add("main_color");
+    el.id = "bigScreen";
+    document.body.appendChild(el);
+
+    el = document.createElement("div");
+    el.classList.add("container");
+    el.id = "container";
+    document.body.appendChild(el);
+
     let colors = ["red", "green", "blue", "yellow"];
     for (let clr of colors) {
         // create div
