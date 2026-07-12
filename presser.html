@@ -3,8 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        .main_color{
+            width: 400px;
+            height: 400px;
+            border: 1px solid black;
+            border-radius: 10px;
+            margin: 0 auto;
+        }
+        .btn{
+            width: 70px;
+            height: 70px;
+            border: 1px solid black;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 10px;
+        }
+        .container{
+            width: 100%;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-
+<div class="main_color" id="bigScreen"></div>
+<div class="container">
+    <div class="btn" style="background-color: red;"></div>
+    <div class="btn"></div>
+    <div class="btn"></div>
+    <div class="btn"></div>
+</div>
+<script>
+    function setBigRed() {
+        let screen = document.getElementById("bigScreen");
+        screen.style.backgroundColor = "red";
+    }
+</script>
 </body>
 </html>
