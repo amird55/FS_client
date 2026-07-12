@@ -28,15 +28,15 @@
 <body>
 <div class="main_color" id="bigScreen"></div>
 <div class="container">
-    <div class="btn" style="background-color: red;"></div>
-    <div class="btn"></div>
+    <div onclick="setBig('red')" class="btn" style="background-color: red;"></div>
+    <div onclick="setBig('green')" class="btn" style="background-color: green;"></div>
     <div class="btn"></div>
     <div class="btn"></div>
 </div>
 <script>
-    function setBigRed() {
+    function setBig(color) {
         let screen = document.getElementById("bigScreen");
-        screen.style.backgroundColor = "red";
+        screen.style.backgroundColor = color;
     }
 </script>
 </body>
