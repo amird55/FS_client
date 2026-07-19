@@ -37,7 +37,8 @@
     el.id = "bigScreen";
     document.body.appendChild(el);
 
-    let colors = ["#f85656", "#8cf48c", "#a0e5f4", "yellow"];
+    let currColor="";
+    let colors = ["#f85656", "#8cf48c", "#a0e5f4", "yellow","purple"];
     let cnt={};
     createBtnsPanel();
     showCounters();
@@ -68,9 +69,13 @@
         }
     }
     function setBig(color) {
-        let screen = document.getElementById("bigScreen");
-        screen.style.backgroundColor = color;
-        cnt[color]++;
+        if (currColor !== color) {
+            let screen = document.getElementById("bigScreen");
+            screen.style.backgroundColor = color;
+            currColor = color;
+            cnt[color]++;
+            showCounters();
+        }
     }
     function showCounters(){
         for (let clr of colors) {
