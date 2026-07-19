@@ -27,6 +27,17 @@
         .food{
             background-color: red;
         }
+        #gameBoard{
+            margin: 0 auto;
+            width: 600px;
+            display: grid;
+            grid-template-columns: repeat(20,30px);
+            grid-template-rows: repeat(20,30px);
+        }
+        #gameBoard div{
+            border: 1px solid black;
+            background-color: white;
+        }
     </style>
 </head>
 <body>
@@ -100,9 +111,21 @@
             }
             brd.appendChild(tbl);
         }
+        function showBoardWithDiv(){
+            let brd=document.getElementById("gameBoard");
+            for(let r=0;r<numOfRows;r++){
+                for(let c=0;c<numOfCols;c++){
+                    let el=document.createElement("div");
+                    if (board[r][c]===CellValues.FOOD){
+                        el.classList.add("food");
+                    }
+                    brd.appendChild(el);
+                }
+            }
+        }
         createBoard();
         AddFood();
-        showBoardWithInnerHTML();
+        showBoardWithDiv();
         console.log(board)
     </script>
 </body>
