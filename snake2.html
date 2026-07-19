@@ -490,6 +490,15 @@
             }
         }
         console.log(board);
+        
+        function AddFood(){
+            let row,col;
+            do {
+                col = Math.floor(Math.random() * numOfCols);
+                row = Math.floor(Math.random() * numOfRows);
+            }while(board[row][col] > 0);
+            board[row][col]=5;
+        }
     </script>
 </body>
 </html>
