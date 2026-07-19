@@ -41,6 +41,9 @@
         .snake{
             background-color: lightskyblue ;
         }
+        .snakeHead{
+            background-color: #129ff6;
+        }
     </style>
 </head>
 <body>
@@ -60,6 +63,7 @@
             EMPTY:0,
             FOOD:5,
             SNAKE:2,
+            SNAKE_HEAD:4,
         }
         let numOfCols=20;
         let numOfRows=20;
@@ -120,11 +124,10 @@
             for(let r=0;r<numOfRows;r++){
                 for(let c=0;c<numOfCols;c++){
                     let el=document.createElement("div");
-                    if (board[r][c]===CellValues.SNAKE){
-                        el.classList.add("snake");
-                    }
-                    else if (board[r][c]===CellValues.FOOD){
-                        el.classList.add("food");
+                    switch (board[r][c]) {
+                        case CellValues.SNAKE:      el.classList.add("snake");      break;
+                        case CellValues.SNAKE_HEAD: el.classList.add("snakeHead");  break;
+                        case CellValues.FOOD:       el.classList.add("food");       break;
                     }
                     brd.appendChild(el);
                 }
@@ -133,7 +136,7 @@
         function InitSnake(){
             board[5][0]=CellValues.SNAKE;
             board[5][1]=CellValues.SNAKE;
-            board[5][2]=CellValues.SNAKE;
+            board[5][2]=CellValues.SNAKE_HEAD;
         }
         createBoard();
         InitSnake();
