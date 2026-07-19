@@ -24,19 +24,22 @@
             background-color: white;
         }
         table{margin: 0 auto; }
-        .food{
-            background-color: red;
-        }
         #gameBoard{
             margin: 0 auto;
             width: 600px;
             display: grid;
             grid-template-columns: repeat(20,30px);
             grid-template-rows: repeat(20,30px);
+            background-color: white;
         }
         #gameBoard div{
             border: 1px solid black;
-            background-color: white;
+        }
+        .food{
+            background-color: red ;
+        }
+        .snake{
+            background-color: lightskyblue ;
         }
     </style>
 </head>
@@ -56,6 +59,7 @@
         const CellValues={
             EMPTY:0,
             FOOD:5,
+            SNAKE:2,
         }
         let numOfCols=20;
         let numOfRows=20;
@@ -116,17 +120,25 @@
             for(let r=0;r<numOfRows;r++){
                 for(let c=0;c<numOfCols;c++){
                     let el=document.createElement("div");
-                    if (board[r][c]===CellValues.FOOD){
+                    if (board[r][c]===CellValues.SNAKE){
+                        el.classList.add("snake");
+                    }
+                    else if (board[r][c]===CellValues.FOOD){
                         el.classList.add("food");
                     }
                     brd.appendChild(el);
                 }
             }
         }
+        function InitSnake(){
+            board[5][0]=CellValues.SNAKE;
+            board[5][1]=CellValues.SNAKE;
+            board[5][2]=CellValues.SNAKE;
+        }
         createBoard();
+        InitSnake();
         AddFood();
         showBoardWithDiv();
-        console.log(board)
     </script>
 </body>
 </html>
