@@ -57,6 +57,9 @@
             להתחלת משחק חדש
         </button>
     </div>
+    <div>
+        <button onclick="moveLeft();showBoardWithDiv();">שמאלה</button>
+    </div>
     <div id="gameBoard"></div>
     <script>
         const CellValues={
@@ -86,6 +89,7 @@
         }
         function showBoardWithDiv(){
             let brd=document.getElementById("gameBoard");
+            brd.innerHTML="";
             for(let r=0;r<numOfRows;r++){
                 for(let c=0;c<numOfCols;c++){
                     let el=document.createElement("div");
@@ -111,6 +115,7 @@
                 ];
         }
         function moveLeft(){
+            // console.log("moveLeft")
             let head=snake[0];
             snake.unshift({r:head.r,c:head.c+1});
             board[head.r][head.c+1]=CellValues.SNAKE_HEAD
@@ -120,8 +125,8 @@
         }
         createBoard();
         InitSnake();
-        moveLeft()
-        moveLeft()
+        // moveLeft()
+        // moveLeft()
         AddFood();
         showBoardWithDiv();
     </script>
