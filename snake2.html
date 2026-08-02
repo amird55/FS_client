@@ -59,6 +59,7 @@
     </div>
     <div>
         <button onclick="moveLeft();showBoardWithDiv();">שמאלה</button>
+        <button onclick="moveRight();showBoardWithDiv();">ימינה</button>
     </div>
     <div id="gameBoard"></div>
     <script>
@@ -115,13 +116,24 @@
                 ];
         }
         function moveLeft(){
-            // console.log("moveLeft")
             let head=snake[0];
-            snake.unshift({r:head.r,c:head.c+1});
-            board[head.r][head.c+1]=CellValues.SNAKE_HEAD
-            board[head.r][head.c]=CellValues.SNAKE;
+            let newCol=head.c+1;
+            let newRow=head.r;
+            snake.unshift({r:newRow,c:newCol});
             let tail=snake.pop();
             board[tail.r][tail.c]=CellValues.EMPTY;
+            board[newRow][newCol]=CellValues.SNAKE_HEAD
+            board[head.r][head.c]=CellValues.SNAKE;
+        }
+        function moveRight(){
+            let head=snake[0];
+            let newCol=head.c-1;
+            let newRow=head.r;
+            snake.unshift({r:newRow,c:newCol});
+            let tail=snake.pop();
+            board[tail.r][tail.c]=CellValues.EMPTY;
+            board[newRow][newCol]=CellValues.SNAKE_HEAD
+            board[head.r][head.c]=CellValues.SNAKE;
         }
         createBoard();
         InitSnake();
