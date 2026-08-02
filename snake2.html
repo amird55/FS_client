@@ -121,6 +121,10 @@
             let head=snake[0];
             let newCol=head.c+1;
             let newRow=head.r;
+            if (newCol>=numOfCols) {
+                endGame()
+            }
+            
             snake.unshift({r:newRow,c:newCol});
             let tail=snake.pop();
             board[tail.r][tail.c]=CellValues.EMPTY;
@@ -131,6 +135,9 @@
             let head=snake[0];
             let newCol=head.c-1;
             let newRow=head.r;
+            if (newCol < 0) {
+                endGame()
+            }
             snake.unshift({r:newRow,c:newCol});
             let tail=snake.pop();
             board[tail.r][tail.c]=CellValues.EMPTY;
@@ -141,6 +148,9 @@
             let head=snake[0];
             let newCol=head.c;
             let newRow=head.r-1;
+            if (newRow < 0) {
+                endGame()
+            }
             snake.unshift({r:newRow,c:newCol});
             let tail=snake.pop();
             board[tail.r][tail.c]=CellValues.EMPTY;
@@ -151,11 +161,17 @@
             let head=snake[0];
             let newCol=head.c;
             let newRow=head.r+1;
+            if (newRow >= numOfRows) {
+                endGame()
+            }
             snake.unshift({r:newRow,c:newCol});
             let tail=snake.pop();
             board[tail.r][tail.c]=CellValues.EMPTY;
             board[newRow][newCol]=CellValues.SNAKE_HEAD
             board[head.r][head.c]=CellValues.SNAKE;
+        }
+        function endGame(){
+            alert("game over!")
         }
         createBoard();
         InitSnake();
