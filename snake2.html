@@ -38,6 +38,12 @@
         .halfLine2{
             grid-column: 3/span 2;
         }
+        #scorePanel{
+            position: fixed;
+            top: 300px;
+            right: 100px;
+            font-size: 40px;
+        }
         td{
             height: 20px;
             width: 20px;
@@ -84,8 +90,10 @@
         <button class="halfLine2"  onclick="moveLeft();showBoardWithDiv();">שמאלה</button>
         <button class="fullLine " onclick="moveDown();showBoardWithDiv();">למטה</button>
     </div>
+    <div id="scorePanel">0</div>
     <div id="gameBoard"></div>
     <script>
+        let score = 0;
         const CellValues={
             EMPTY:0,
             FOOD:5,
@@ -138,6 +146,22 @@
                     {r:5,c:0}
                 ];
         }
+        function FoodEaten(){
+            score+=10;
+            AddFood();
+            document.getElementById("scorePanel").innerHTML=score;
+        }
+        function GenStep(newRow,newCol,head){
+            if (board[newRow][newCol]===CellValues.FOOD) {
+                FoodEaten();
+            }
+
+            snake.unshift({r:newRow,c:newCol});
+            let tail=snake.pop();
+            board[tail.r][tail.c]=CellValues.EMPTY;
+            board[newRow][newCol]=CellValues.SNAKE_HEAD
+            board[head.r][head.c]=CellValues.SNAKE;
+        }
         function moveLeft(){
             let head=snake[0];
             let newCol=head.c+1;
@@ -145,12 +169,7 @@
             if (newCol>=numOfCols) {
                 endGame()
             }
-            
-            snake.unshift({r:newRow,c:newCol});
-            let tail=snake.pop();
-            board[tail.r][tail.c]=CellValues.EMPTY;
-            board[newRow][newCol]=CellValues.SNAKE_HEAD
-            board[head.r][head.c]=CellValues.SNAKE;
+            GenStep(newRow,newCol,head);
         }
         function moveRight(){
             let head=snake[0];
@@ -159,11 +178,7 @@
             if (newCol < 0) {
                 endGame()
             }
-            snake.unshift({r:newRow,c:newCol});
-            let tail=snake.pop();
-            board[tail.r][tail.c]=CellValues.EMPTY;
-            board[newRow][newCol]=CellValues.SNAKE_HEAD
-            board[head.r][head.c]=CellValues.SNAKE;
+            GenStep(newRow,newCol,head);
         }
         function moveUp(){
             let head=snake[0];
@@ -172,11 +187,7 @@
             if (newRow < 0) {
                 endGame()
             }
-            snake.unshift({r:newRow,c:newCol});
-            let tail=snake.pop();
-            board[tail.r][tail.c]=CellValues.EMPTY;
-            board[newRow][newCol]=CellValues.SNAKE_HEAD
-            board[head.r][head.c]=CellValues.SNAKE;
+            GenStep(newRow,newCol,head);
         }
         function moveDown(){
             let head=snake[0];
@@ -185,11 +196,7 @@
             if (newRow >= numOfRows) {
                 endGame()
             }
-            snake.unshift({r:newRow,c:newCol});
-            let tail=snake.pop();
-            board[tail.r][tail.c]=CellValues.EMPTY;
-            board[newRow][newCol]=CellValues.SNAKE_HEAD
-            board[head.r][head.c]=CellValues.SNAKE;
+            GenStep(newRow,newCol,head);
         }
         function endGame(){
             alert("game over!")
