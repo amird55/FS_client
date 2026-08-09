@@ -153,6 +153,7 @@
             AddFood();
             document.getElementById("scorePanel").innerHTML=score;
         }
+        let direction="left";
         function GenStep(newRow,newCol,head){
             if (board[newRow][newCol]===CellValues.FOOD) {
                 FoodEaten();
@@ -208,9 +209,20 @@
             }
             GenStep(newRow,newCol,head);
         }
+        function move(){
+            switch (direction) {
+                case "left":  moveLeft();   break;
+                case "right": moveRight();  break;
+                case "up":    moveUp();     break;
+                case "down":  moveDown();   break;
+            }
+            showBoardWithDiv();
+            timeId = setTimeout(move,500)
+        }
         function endGame(){
             alert("game over!")
         }
+        
         
         createBoard();
         InitSnake();
@@ -220,6 +232,7 @@
         showBoardWithDiv();
         
         document.getElementById("gameStartMsg").style.display="none";
+        let timeId = setTimeout(move,500)
     </script>
 </body>
 </html>
