@@ -80,7 +80,7 @@
     <div class="greenText" id="gameStartMsg">
         נא ללחוץ כדי להתחיל את המשחק
         <br />
-        <button>
+        <button onclick="startNewGame();">
             להתחלת משחק חדש
         </button>
     </div>
@@ -101,9 +101,27 @@
             SNAKE:2,
             SNAKE_HEAD:4,
         }
+        let direction="left";
         let numOfCols=20;
         let numOfRows=20;
+        let timeId;
+        let gameOver=false;
+        let snake;
         let board=[];
+        function startNewGame(){
+            score = 0;
+            removeTailCnt=0;
+            direction="left";
+            gameOver=false;
+            board=[];
+            createBoard();
+            InitSnake();
+            AddFood();
+            showBoardWithDiv();
+
+            document.getElementById("gameStartMsg").style.display="none";
+            timeId = setTimeout(move,500)
+        }
         function createBoard(){
             for(let i=0;i<numOfRows;i++){
                 board[i]=[];
@@ -135,7 +153,6 @@
                 }
             }
         }
-        let snake;
         function InitSnake(){
             board[5][2]=CellValues.SNAKE_HEAD;
             board[5][1]=CellValues.SNAKE;
@@ -153,7 +170,6 @@
             AddFood();
             document.getElementById("scorePanel").innerHTML=score;
         }
-        let direction="left";
         function GenStep(newRow,newCol,head){
             if (board[newRow][newCol]===CellValues.FOOD) {
                 FoodEaten();
@@ -217,25 +233,20 @@
                 case "down":  moveDown();   break;
             }
             showBoardWithDiv();
-            timeId = setTimeout(move,500)
+            if (!gameOver) {
+                timeId = setTimeout(move, 500)
+            }
         }
         function SetDirection(newDirection){
             direction=newDirection;
         }
         function endGame(){
-            alert("game over!")
+            document.getElementById("gameStartMsg").style.display="block";
+            clearTimeout(timeId);
+            gameOver=true;
         }
-        
-        
-        createBoard();
-        InitSnake();
-        // moveLeft()
-        // moveLeft()
-        AddFood();
-        showBoardWithDiv();
-        
-        document.getElementById("gameStartMsg").style.display="none";
-        let timeId = setTimeout(move,500)
+
+        document.getElementById("gameStartMsg").style.display="block";
     </script>
 </body>
 </html>
