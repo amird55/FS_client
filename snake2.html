@@ -94,6 +94,7 @@
     <div id="gameBoard"></div>
     <script>
         let score = 0;
+        let removeTailCnt=0;
         const CellValues={
             EMPTY:0,
             FOOD:5,
@@ -147,6 +148,7 @@
                 ];
         }
         function FoodEaten(){
+            removeTailCnt=3;
             score+=10;
             AddFood();
             document.getElementById("scorePanel").innerHTML=score;
@@ -157,8 +159,12 @@
             }
 
             snake.unshift({r:newRow,c:newCol});
-            let tail=snake.pop();
-            board[tail.r][tail.c]=CellValues.EMPTY;
+            if (removeTailCnt === 0){
+                let tail = snake.pop();
+                board[tail.r][tail.c] = CellValues.EMPTY;
+            } else {
+                removeTailCnt--;
+            }
             board[newRow][newCol]=CellValues.SNAKE_HEAD
             board[head.r][head.c]=CellValues.SNAKE;
         }
