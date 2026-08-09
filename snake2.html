@@ -158,13 +158,17 @@
                 FoodEaten();
             }
 
-            snake.unshift({r:newRow,c:newCol});
             if (removeTailCnt === 0){
                 let tail = snake.pop();
                 board[tail.r][tail.c] = CellValues.EMPTY;
             } else {
                 removeTailCnt--;
             }
+            if ((board[newRow][newCol]===CellValues.SNAKE)||
+                (board[newRow][newCol]===CellValues.SNAKE_HEAD)){
+                endGame();
+            }
+            snake.unshift({r:newRow,c:newCol});
             board[newRow][newCol]=CellValues.SNAKE_HEAD
             board[head.r][head.c]=CellValues.SNAKE;
         }
