@@ -85,10 +85,10 @@
         </button>
     </div>
     <div class="buttonsPanel gridPanel">
-        <button class="fullLine " onclick="moveUp();showBoardWithDiv();">למעלה</button>
-        <button class="halfLine1"  onclick="moveRight();showBoardWithDiv();">ימינה</button>
-        <button class="halfLine2"  onclick="moveLeft();showBoardWithDiv();">שמאלה</button>
-        <button class="fullLine " onclick="moveDown();showBoardWithDiv();">למטה</button>
+        <button class="fullLine "  onclick="SetDirection('up');">למעלה</button>
+        <button class="halfLine1"  onclick="SetDirection('right');">ימינה</button>
+        <button class="halfLine2"  onclick="SetDirection('left');">שמאלה</button>
+        <button class="fullLine "  onclick="SetDirection('down');">למטה</button>
     </div>
     <div id="scorePanel">0</div>
     <div id="gameBoard"></div>
@@ -211,13 +211,16 @@
         }
         function move(){
             switch (direction) {
-                case "left":  moveLeft();   break;
-                case "right": moveRight();  break;
                 case "up":    moveUp();     break;
+                case "right": moveRight();  break;
+                case "left":  moveLeft();   break;
                 case "down":  moveDown();   break;
             }
             showBoardWithDiv();
             timeId = setTimeout(move,500)
+        }
+        function SetDirection(newDirection){
+            direction=newDirection;
         }
         function endGame(){
             alert("game over!")
