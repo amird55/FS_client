@@ -57,7 +57,12 @@
 </div>
 <script>
     const game_viewer=document.getElementById("game_viewer");
-    let options=["red","blue","green","yellow"];
+    let options=[
+        {letter:"R",word:"red",tone:""},
+        {letter:"B",word:"blue",tone:""},
+        {letter:"G",word:"green",tone:""},
+        {letter:"Y",word:"yellow",tone:""},
+        ];
     let rezef=[];
     let rezef_index=0;
     
@@ -71,7 +76,7 @@
     function fillRezef(){
         for (let i=0;i<colorsNum;i++){
             let wordIdx=Math.floor(Math.random()*(options.length));
-            rezef.push(options[wordIdx]);
+            rezef.push(options[wordIdx].word);
         }
     }
     function colorStep(){
