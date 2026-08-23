@@ -50,19 +50,30 @@
 <body>
 <div id="game_viewer"></div>
 <div id="btn_panel">
-    <div class="red smallBtn"></div>
-    <div class="blue smallBtn"></div>
-    <div class="green smallBtn"></div>
-    <div class="yellow smallBtn"></div>
+    <div onclick="startGame()" class="red smallBtn"></div>
+    <div onclick="startGame()" class="blue smallBtn"></div>
+    <div onclick="startGame()" class="green smallBtn"></div>
+    <div onclick="startGame()" class="yellow smallBtn"></div>
 </div>
 <script>
     const game_viewer=document.getElementById("game_viewer");
-    let rezef=["red","blue","green","yellow"];
+    let options=["red","blue","green","yellow"];
+    let rezef=[];
     let rezef_index=0;
     
     let colorTime=500;
     let breakTime=200;
-    colorStep()
+    let colorsNum = 5;
+    function startGame() {
+        fillRezef();
+        colorStep()
+    }
+    function fillRezef(){
+        for (let i=0;i<colorsNum;i++){
+            let wordIdx=Math.floor(Math.random()*(options.length));
+            rezef.push(options[wordIdx]);
+        }
+    }
     function colorStep(){
         game_viewer.className="";
         game_viewer.classList.add(rezef[rezef_index++]);
