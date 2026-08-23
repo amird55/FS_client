@@ -40,6 +40,11 @@
         .smallBtn{
             transform: scale(0.5);
         }
+        #game_viewer{
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+        }
     </style>
 </head>
 <body>
@@ -55,13 +60,18 @@
     let rezef=["red","blue","green","yellow"];
     let rezef_index=0;
     
+    let colorTime=500;
+    let breakTime=200;
     colorStep()
-    
     function colorStep(){
         game_viewer.className="";
         game_viewer.classList.add(rezef[rezef_index++]);
+        setTimeout(breakStep, colorTime);
+    }
+    function breakStep(){
+        game_viewer.className="";
         if (rezef_index < rezef.length) {
-            setTimeout(colorStep, 500);
+            setTimeout(colorStep, breakTime);
         }
     }
 </script>
