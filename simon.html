@@ -63,6 +63,7 @@
         {letter:"G",word:"green",tone:""},
         {letter:"Y",word:"yellow",tone:""},
         ];
+    let rezef_str="";
     let rezef=[];
     let rezef_index=0;
     
@@ -74,10 +75,13 @@
         colorStep()
     }
     function fillRezef(){
+        rezef_str="";
         for (let i=0;i<colorsNum;i++){
             let wordIdx=Math.floor(Math.random()*(options.length));
             rezef.push(options[wordIdx].word);
+            rezef_str += options[wordIdx].letter;
         }
+        console.log(rezef_str)
     }
     function colorStep(){
         game_viewer.className="";
