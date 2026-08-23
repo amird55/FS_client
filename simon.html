@@ -45,9 +45,18 @@
             height: 300px;
             margin: 0 auto;
         }
+        td{
+            width: 30px;
+            height: 30px;
+            border: 2px solid black;
+        }
+        table{
+            margin: 0 auto;
+        }
     </style>
 </head>
 <body>
+<div id="placements"></div>
 <div id="game_viewer"></div>
 <div id="btn_panel">
     <div onclick="startGame()" class="red smallBtn"></div>
@@ -82,6 +91,17 @@
             rezef_str += options[wordIdx].letter;
         }
         console.log(rezef_str)
+        createPlacement();
+    }
+    function createPlacement(){
+        let tbl=document.createElement("table");
+        let tr=document.createElement("tr");
+        for (let i=0;i<colorsNum;i++){
+            let td=document.createElement("td");
+            tr.appendChild(td);
+        }
+        tbl.appendChild(tr);
+        document.getElementById("placements").appendChild(tbl);
     }
     function colorStep(){
         game_viewer.className="";
