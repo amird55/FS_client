@@ -83,6 +83,7 @@
     let colorTime=500;
     let breakTime=200;
     let colorsNum = 5;
+    let currentBox=0;
     function colorPressed(color){
         let cls="";
         switch(color){
@@ -91,11 +92,14 @@
             case "blue":    cls="blue";     break;
             case "yellow":  cls="yellow";   break;
         }
-        let destination = document.getElementById("cell_0");
+        let destination = document.getElementById(`cell_${currentBox++}`);
         let dv=document.createElement("div");
         dv.className=cls+" inBox";
         destination.innerHTML="";
         destination.appendChild(dv);
+        if (currentBox === colorsNum){
+            setTimeout(startGame,500);
+        }
     }
     function createPlacement(){
         document.getElementById("placements").innerHTML="";
@@ -108,6 +112,7 @@
         }
         tbl.appendChild(tr);
         document.getElementById("placements").appendChild(tbl);
+        currentBox=0;
     }
     
     function startGame() {
