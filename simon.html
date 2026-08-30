@@ -59,10 +59,10 @@
 <div id="placements"></div>
 <div id="game_viewer"></div>
 <div id="btn_panel">
-    <div onclick="startGame()" class="red smallBtn"></div>
-    <div onclick="startGame()" class="blue smallBtn"></div>
-    <div onclick="startGame()" class="green smallBtn"></div>
-    <div onclick="startGame()" class="yellow smallBtn"></div>
+    <div onclick="colorPressed('red')"    class="red    smallBtn"></div>
+    <div onclick="colorPressed('blue')"   class="blue   smallBtn"></div>
+    <div onclick="colorPressed('green')"  class="green  smallBtn"></div>
+    <div onclick="colorPressed('yellow')" class="yellow smallBtn"></div>
 </div>
 <script>
     const game_viewer=document.getElementById("game_viewer");
@@ -79,7 +79,32 @@
     let colorTime=500;
     let breakTime=200;
     let colorsNum = 5;
+    function colorPressed(color){
+        let cls="";
+        switch(color){
+            case "red":     cls="red";      break;
+            case "green":   cls="green";    break;
+            case "blue":    cls="blue";     break;
+            case "yellow":  cls="yellow";   break;
+        }
+        let destination = document.getElementById("cell_0");
+        destination.className=cls;
+    }
+    function createPlacement(){
+        document.getElementById("placements").innerHTML="";
+        let tbl=document.createElement("table");
+        let tr=document.createElement("tr");
+        for (let i=0;i<colorsNum;i++){
+            let td=document.createElement("td");
+            td.id = `cell_${i}`;
+            tr.appendChild(td);
+        }
+        tbl.appendChild(tr);
+        document.getElementById("placements").appendChild(tbl);
+    }
+    
     function startGame() {
+        createPlacement();
         fillRezef();
         colorStep()
     }
@@ -91,17 +116,6 @@
             rezef_str += options[wordIdx].letter;
         }
         console.log(rezef_str)
-        createPlacement();
-    }
-    function createPlacement(){
-        let tbl=document.createElement("table");
-        let tr=document.createElement("tr");
-        for (let i=0;i<colorsNum;i++){
-            let td=document.createElement("td");
-            tr.appendChild(td);
-        }
-        tbl.appendChild(tr);
-        document.getElementById("placements").appendChild(tbl);
     }
     function colorStep(){
         game_viewer.className="";
@@ -114,6 +128,8 @@
             setTimeout(colorStep, breakTime);
         }
     }
+
+    startGame()
 </script>
 </body>
 </html>
