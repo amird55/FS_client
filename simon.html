@@ -40,6 +40,10 @@
         .smallBtn{
             transform: scale(0.5);
         }
+        .inBox{
+            width: 90%;
+            height: 90%;
+        }
         #game_viewer{
             width: 300px;
             height: 300px;
@@ -88,7 +92,10 @@
             case "yellow":  cls="yellow";   break;
         }
         let destination = document.getElementById("cell_0");
-        destination.className=cls;
+        let dv=document.createElement("div");
+        dv.className=cls+" inBox";
+        destination.innerHTML="";
+        destination.appendChild(dv);
     }
     function createPlacement(){
         document.getElementById("placements").innerHTML="";
